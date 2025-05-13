@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Handmade Store - Thế giới đồ handmade xinh xắn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Biến CSS */
+        :root {
+            --primary-pink: #ffc0cb;
+            --light-pink: #ffe6e8;
+            --dark-pink: #ff9aa2;
+            --white: #ffffff;
+            --light-gray: #f9f9f9;
+            --text-color: #333333;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--dark-pink);
+        }
+        
+        .logo span {
+            color: var(--text-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 18px;
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--dark-pink);
+            background-color: var(--light-pink);
+        }
+        
+        .cart-icon {
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(to right, var(--light-pink), var(--primary-pink));
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 70px;
+            text-align: center;
+            color: var(--text-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--dark-pink);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #ff8a94;
+            transform: translateY(-3px);
+        }
+        
+        /* Hiệu ứng bong bóng */
+        .bubble {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        .bubble:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .bubble:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            top: 70%;
+            left: 20%;
+            animation-delay: 1s;
+        }
+        
+        .bubble:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 30%;
+            right: 30%;
+            animation-delay: 2s;
+        }
+        
+        .bubble:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 3s;
+        }
+        
+        .bubble:nth-child(5) {
+            width: 70px;
+            height: 70px;
+            bottom: 40%;
+            left: 40%;
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+        
+        /* Categories Section */
+        .categories {
+            padding: 80px 5%;
+            background-color: var(--white);
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 32px;
+            margin-bottom: 50px;
+            color: var(--text-color);
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-pink);
+            margin: 15px auto 0;
+        }
+        
+        .category-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .category-card {
+            background-color: var(--light-pink);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .category-img {
+            height: 200px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--dark-pink);
+        }
+        
+        .category-name {
+            padding: 20px;
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        /* Featured Products */
+        .featured-products {
+            padding: 80px 5%;
+            background-color: var(--light-gray);
+        }
+        
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .product-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-img {
+            height: 250px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--primary-pink);
+        }
+        
+        .product-info {
+            padding: 20px;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            color: var(--dark-pink);
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart {
+            background-color: var(--primary-pink);
+            color: var(--text-color);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .add-to-cart:hover {
+            background-color: var(--dark-pink);
+            color: var(--white);
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 5%;
+            background-color: var(--white);
+            text-align: center;
+        }
+        
+        .testimonial-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .testimonial {
+            background-color: var(--light-pink);
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .testimonial::before {
+            content: "\201C"; /* Mã Unicode cho dấu ngoặc kép mở */
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 80px;
+            color: rgba(255, 192, 203, 0.3);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .customer-info {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .customer-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--dark-pink);
+            font-size: 24px;
+        }
+        
+        .customer-name {
+            font-weight: 600;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            padding: 60px 5%;
+            background: linear-gradient(to right, var(--primary-pink), var(--dark-pink));
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .newsletter h2 {
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .newsletter p {
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-size: 16px;
+        }
+        
+        .newsletter-btn {
+            background-color: var(--text-color);
+            color: var(--white);
+            border: none;
+            padding: 0 30px;
+            border-radius: 0 30px 30px 0;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter-btn:hover {
+            background-color: #222;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--light-gray);
+            padding: 60px 5% 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--dark-pink);
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo span {
+            color: var(--text-color);
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--dark-pink);
+        }
+        
+        .footer-links h3, .footer-contact h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--dark-pink);
+        }
+        
+        .contact-info p {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-icon {
+            margin-right: 10px;
+            color: var(--dark-pink);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            
+            nav ul li a {
+                font-size: 16px;
+                padding: 6px 10px;
+            }
+            
+            .hero {
+                height: 400px;
+                margin-top: 120px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 30px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 30px;
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .section-title {
+                font-size: 26px;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            nav ul li a {
+                font-size: 15px;
+                padding: 5px 8px;
+            }
+        }
+        
+        /* Chatbox Styles */
+        .chatbox {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 320px;
+            height: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 1000;
+            display: none; /* Ẩn mặc định, sẽ hiện khi click vào nút chat */
+        }
+        
+        .chatbox-header {
+            background-color: var(--dark-pink);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .chatbox-title {
+            font-weight: 600;
+        }
+        
+        .chatbox-toggle {
+            cursor: pointer;
+        }
+        
+        .chatbox-body {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        
+        .chat-messages {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 10px 15px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        
+        .message-received {
+            background-color: #f0f0f0;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+        
+        .message-sent {
+            background-color: var(--light-pink);
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .message-time {
+            font-size: 11px;
+            color: #888;
+            margin-top: 5px;
+        }
+        
+        .chatbox-footer {
+            padding: 10px 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+        }
+        
+        .chat-input {
+            flex: 1;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            padding: 8px 15px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .chat-send-btn {
+            background-color: var(--dark-pink);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-left: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Chat Button (hiển thị khi chatbox ẩn) */
+        .chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--dark-pink);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+        
+        .chat-button:hover {
+            background-color: #ff8a94;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--dark-pink);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+        }
+        
+        .back-to-top:hover {
+            background-color: #ff8a94;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">Handmade<span>Store</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Sản phẩm</a></li>
+                    <li><a href="#">Danh mục</a></li>
+                    <li><a href="#">Về chúng tôi</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="bubble"></div>
+        <div class="hero-content">
+            <h1>Thế giới đồ handmade xinh xắn</h1>
+            <p>Khám phá bộ sưu tập độc đáo với những sản phẩm handmade đầy tâm huyết và sáng tạo, mang đến không gian sống đẹp và ý nghĩa cho bạn.</p>
+            <a href="#" class="btn">Khám phá ngay</a>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <h2 class="section-title">Danh mục sản phẩm</h2>
+        <div class="category-container">
+            <div class="category-card">
+                <div class="category-img">🧸</div>
+                <div class="category-name">Đồ chơi handmade</div>
+            </div>
+            <div class="category-card">
+                <div class="category-img">🎁</div>
+                <div class="category-name">Quà tặng</div>
+            </div>
+            <div class="category-card">
+                <div class="category-img">🏠</div>
+                <div class="category-name">Trang trí nhà cửa</div>
+            </div>
+            <div class="category-card">
+                <div class="category-img">👜</div>
+                <div class="category-name">Phụ kiện thời trang</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <h2 class="section-title">Sản phẩm nổi bật</h2>
+        <div class="product-container">
+            <div class="product-card">
+                <div class="product-img">🧸</div>
+                <div class="product-info">
+                    <div class="product-name">Gấu bông handmade</div>
+                    <div class="product-price">350.000đ</div>
+                    <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">🎁</div>
+                <div class="product-info">
+                    <div class="product-name">Hộp quà tặng cá nhân hóa</div>
+                    <div class="product-price">250.000đ</div>
+                    <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">💐</div>
+                <div class="product-info">
+                    <div class="product-name">Hoa giấy trang trí</div>
+                    <div class="product-price">180.000đ</div>
+                    <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">📔</div>
+                <div class="product-info">
+                    <div class="product-name">Sổ tay bìa vải handmade</div>
+                    <div class="product-price">120.000đ</div>
+                    <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">🕯️</div>
+                <div class="product-info">
+                    <div class="product-name">Nến thơm handmade</div>
+                    <div class="product-price">150.000đ</div>
+                    <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-img">👜</div>
+                <div class="product-info">
+                    <div class="product-name">Túi xách móc len</div>
+                    <div class="product-price">280.000đ</div>
+                    <button class="add-to-cart">Thêm vào giỏ hàng</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2 class="section-title">Khách hàng nói gì về chúng tôi</h2>
+        <div class="testimonial-container">
+            <div class="testimonial">
+                <p class="testimonial-text">Sản phẩm của Handmade Store thật sự là một tác phẩm nghệ thuật. Tôi đã mua một chiếc gấu bông handmade cho con gái tôi và cô bé rất thích nó. Chất lượng tuyệt vời và dịch vụ khách hàng rất chu đáo!</p>
+                <div class="customer-info">
+                    <div class="customer-img">👩</div>
+                    <div class="customer-name">Nguyễn Thị Hương</div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <p class="testimonial-text">Nến thơm handmade của shop thật sự tạo nên không gian thư giãn tuyệt vời cho căn nhà của tôi. Mùi hương rất tự nhiên và thời gian cháy lâu hơn nhiều so với các loại nến thông thường. Chắc chắn tôi sẽ quay lại mua thêm!</p>
+                <div class="customer-info">
+                    <div class="customer-img">👨</div>
+                    <div class="customer-name">Trần Văn Minh</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2>Đăng ký nhận thông tin</h2>
+        <p>Hãy đăng ký để nhận thông tin về sản phẩm mới và ưu đãi đặc biệt từ Handmade Store.</p>
+        <form class="newsletter-form">
+            <input type="email" class="newsletter-input" placeholder="Nhập email của bạn">
+            <button type="submit" class="newsletter-btn">Đăng ký</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">Handmade<span>Store</span></div>
+                <p>Handmade Store - Nơi mang đến những sản phẩm handmade chất lượng cao, được làm thủ công với tất cả tâm huyết và sự sáng tạo.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-pinterest-p"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>Liên kết nhanh</h3>
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Sản phẩm</a></li>
+                    <li><a href="#">Danh mục</a></li>
+                    <li><a href="#">Về chúng tôi</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Hỗ trợ</h3>
+                <ul>
+                    <li><a href="#">Chính sách đổi trả</a></li>
+                    <li><a href="#">Chính sách bảo mật</a></li>
+                    <li><a href="#">Điều khoản dịch vụ</a></li>
+                    <li><a href="#">Phương thức thanh toán</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h3>Liên hệ</h3>
+                <div class="contact-info">
+                    <p><span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span> 123 Đường ABC, Quận XYZ, Hanoi</p>
+                    <p><span class="contact-icon"><i class="fas fa-phone"></i></span> +84 123 456 789</p>
+                    <p><span class="contact-icon"><i class="fas fa-envelope"></i></span> info@handmadestore.vn</p>
+                    <p><span class="contact-icon"><i class="fas fa-clock"></i></span> Thứ 2 - Thứ 7: 9h - 18h</p>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Handmade Store. Tất cả quyền được bảo lưu.</p>
+        </div>
+    </footer>
+
+    <!-- Chatbox -->
+    <div class="chatbox">
+        <div class="chatbox-header">
+            <div class="chatbox-title">Hỗ trợ trực tuyến</div>
+            <div class="chatbox-toggle"><i class="fas fa-minus"></i></div>
+        </div>
+        <div class="chatbox-body">
+            <div class="chat-messages">
+                <div class="message message-received">
+                    <div class="message-content">Xin chào! Chúng tôi có thể giúp gì cho bạn?</div>
+                    <div class="message-time">10:30</div>
+                </div>
+                <!-- Tin nhắn sẽ được thêm vào đây qua JavaScript -->
+            </div>
+        </div>
+        <div class="chatbox-footer">
+            <input type="text" placeholder="Nhập tin nhắn..." class="chat-input">
+            <button class="chat-send-btn"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Chat Button -->
+    <div class="chat-button">
+        <i class="fas fa-comments"></i>
+    </div>
+
+    <!-- Back to top button -->
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Lấy các phần tử DOM cho chatbox
+        const chatButton = document.querySelector('.chat-button');
+        const chatbox = document.querySelector('.chatbox');
+        const chatboxToggle = document.querySelector('.chatbox-toggle');
+        const chatInput = document.querySelector('.chat-input');
+        const sendButton = document.querySelector('.chat-send-btn');
+        const chatMessages = document.querySelector('.chat-messages');
+        
+        // Hiện/ẩn chatbox khi click vào nút chat
+        chatButton.addEventListener('click', function() {
+            chatbox.style.display = 'flex';
+            chatButton.style.display = 'none';
+        });
+        
+        // Ẩn/hiện chatbox khi click vào nút thu nhỏ
+        chatboxToggle.addEventListener('click', function() {
+            if (chatbox.style.display === 'none') {
+                chatbox.style.display = 'flex';
+                chatButton.style.display = 'none';
+            } else {
+                chatbox.style.display = 'none';
+                chatButton.style.display = 'flex';
+            }
+        });
+        
+        // Gửi tin nhắn khi click vào nút gửi
+        sendButton.addEventListener('click', sendMessage);
+        
+        // Gửi tin nhắn khi nhấn Enter
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Hàm gửi tin nhắn
+        function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message === '') return;
+            
+            // Lấy giờ hiện tại
+            const now = new Date();
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const timeString = `${hours}:${minutes}`;
+            
+            // Tạo HTML cho tin nhắn mới
+            const newMessage = `
+                <div class="message message-sent">
+                    <div class="message-content">${message}</div>
+                    <div class="message-time">${timeString}</div>
+                </div>
+            `;
+            
+            // Thêm tin nhắn vào chatbox
+            chatMessages.innerHTML += newMessage;
+            
+            // Xóa nội dung input
+            chatInput.value = '';
+            
+            // Cuộn xuống tin nhắn mới nhất
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            // Sau 1 giây, thêm tin nhắn phản hồi giả lập
+            setTimeout(function() {
+                const replyMessage = `
+                    <div class="message message-received">
+                        <div class="message-content">Cảm ơn bạn đã liên hệ! Chúng tôi sẽ phản hồi sớm nhất có thể.</div>
+                        <div class="message-time">${hours}:${(parseInt(minutes) + 1).toString().padStart(2, '0')}</div>
+                    </div>
+                `;
+                chatMessages.innerHTML += replyMessage;
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000);
+        }
+
+        // Back to top functionality
+        const backToTopButton = document.querySelector('.back-to-top');
+        
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Thêm animation cho nút "Thêm vào giỏ hàng"
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Thêm hiệu ứng khi click
+                this.innerText = "Đã thêm ✓";
+                this.style.backgroundColor = "#4CAF50";
+                this.style.color = "white";
+                
+                // Trở lại trạng thái ban đầu sau 1.5 giây
+                setTimeout(() => {
+                    this.innerText = "Thêm vào giỏ hàng";
+                    this.style.backgroundColor = "";
+                    this.style.color = "";
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+</html>
